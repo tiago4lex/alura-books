@@ -1,7 +1,7 @@
-import { useState } from "react";
 import Input from "../Input";
 import styled from "styled-components";
 import { useState } from "react";
+import { books } from "./searchData";
 
 const SearchContainer = styled.section`
   background-image: linear-gradient(90deg, #002f52 35%, #326589 165%);
@@ -12,30 +12,62 @@ const SearchContainer = styled.section`
   width: 100%;
 `;
 
-const Title = styled.h1`
+const Title = styled.h2`
   color: #fff;
   font-size: 36px;
   text-align: center;
   width: 100%;
 `;
 
-const Subtitle = styled.h2`
+const Subtitle = styled.h3`
   font-size: 16px;
   font-weight: 500;
   margin-bottom: 40px;
 `;
 
+const Result = styled.div`
+  diplay: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  cursor: pointer;
+
+  p {
+    width: 200px;
+  }
+
+  img {
+    width: 100px;
+  }
+
+  &:hover {
+    border: 1px solid #fff;
+  }
+`;
+
 function Search() {
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchedBooks, setSearchedBooks] = useState([]);
 
   return (
     <SearchContainer>
-      <Title>Já sabe por onde começar?</Title>
-      <Subtitle>Encontre seu livro em nossa estante</Subtitle>
+      <Title>Busque por livros</Title>
+      <Subtitle>Encontre o livro que você procura</Subtitle>
       <Input
-        placeholder="Escreva sua próxima leitura"
-        onBlur={(event) => setSearchTerm(event.target.value)}
+        placeholder="Digite o nome do livro"
+        onChange={(event) => {
+          const search = event.target.value.toLowerCase();
+          const filteredBooks = books.filter((book) =>
+            book.name.toLowerCase().includes(search)
+          );
+          setSearchedBooks(filteredBooks);
+        }}
       />
+      {searchedBooks.map((book) => (
+        <Result key={book.id}>
+          <img src={book.src} alt={book.name} />
+          <p>{book.name}</p>
+        </Result>
+      ))}
     </SearchContainer>
   );
 }
