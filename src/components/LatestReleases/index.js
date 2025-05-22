@@ -1,6 +1,8 @@
 import { books } from "./dataLatestReleases";
-import styled from "styled-components";
 import { Title } from "../Title";
+import RecommendationCard from "../RecommendationCard";
+import styled from "styled-components";
+import bookImg from "../../images/livro2.png"
 
 const LatestReleasesContainer = styled.section`
   background-color: #ebecee;
@@ -27,6 +29,12 @@ function LatestReleases() {
           <img src={book.src} alt={book.name} />
         ))}
       </NewBooksContainer>
+      <RecommendationCard
+        title="Talvez você se interesse por..."
+        subtitle="Angular 11"
+        description="Construindo uma aplicação com a plataforma Google"
+        img={bookImg}
+      />
     </LatestReleasesContainer>
   );
 }
