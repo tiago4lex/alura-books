@@ -1,5 +1,6 @@
 import { books } from "./dataLatestReleases";
 import styled from "styled-components";
+import { Title } from "../Title";
 
 const LatestReleasesContainer = styled.section`
   background-color: #ebecee;
@@ -7,17 +8,6 @@ const LatestReleasesContainer = styled.section`
   display: flex;
   flex-direction: column;
 `;
-
-const Title = styled.h2`
-    width: 100%;
-    padding: 30px 0;
-    background-color: #FFF;
-    color: #EB9B00;
-    font-size: 36px;
-    text-align: center;
-    margin: 0;
-`;
-
 const NewBooksContainer = styled.div`
   margin-top: 30px;
   display: flex;
@@ -29,7 +19,9 @@ const NewBooksContainer = styled.div`
 function LatestReleases() {
   return (
     <LatestReleasesContainer>
-      <Title>ULTIMOS LANÇAMENTOS</Title>
+      <Title color="#eb9b00" fontSize="36px" textAlign="center">
+        ÚLTIMOS LANÇAMENTOS
+      </Title>
       <NewBooksContainer>
         {books.map((book) => (
           <img src={book.src} alt={book.name} />
